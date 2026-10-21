@@ -294,7 +294,7 @@
             color: #991b1b;
         }
 
-        /* --- CONTEXT-AWARE PREVIEW STAGE INDICATOR --- */
+        /* --- STAGE BADGE --- */
         .stage-badge {
             position: absolute;
             top: 12px;
@@ -333,7 +333,6 @@
             border: 1px solid rgba(16, 185, 129, 0.5);
         }
 
-        /* Selection highlight animation */
         .preset-pulse {
             animation: presetPulse 0.9s ease-out;
         }
@@ -343,7 +342,6 @@
             100% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0); }
         }
 
-        /* Small floating badge on selection */
         .selection-toast {
             position: fixed;
             bottom: 30px;
@@ -367,13 +365,120 @@
             transform: translateX(-50%) translateY(0);
             opacity: 1;
         }
+
+        /* --- AUDIO UPLOAD BOX --- */
+        .audio-upload-box {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(5, 150, 105, 0.05));
+            border: 1.5px dashed rgba(16, 185, 129, 0.5);
+            border-radius: 14px;
+            padding: 14px;
+            text-align: center;
+            transition: all 0.25s ease;
+            cursor: pointer;
+        }
+        .audio-upload-box:hover {
+            border-color: rgba(52, 211, 153, 0.8);
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(5, 150, 105, 0.08));
+        }
+        .audio-upload-box.dragover {
+            border-color: #34d399;
+            background: rgba(16, 185, 129, 0.2);
+            transform: scale(1.01);
+        }
+        .audio-upload-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: #6ee7b7;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .audio-upload-hint {
+            color: #64748b;
+            font-size: 10px;
+            margin-top: 6px;
+        }
+
+        /* Uploaded audio info card */
+        .uploaded-audio-info {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            border-radius: 12px;
+            padding: 10px 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .uploaded-audio-info .icon {
+            width: 36px; height: 36px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+        .uploaded-audio-info .details {
+            flex: 1;
+            min-width: 0;
+        }
+        .uploaded-audio-info .name {
+            color: #6ee7b7;
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .uploaded-audio-info .meta {
+            color: #94a3b8;
+            font-size: 10px;
+            margin-top: 2px;
+        }
+        .uploaded-audio-info .remove-btn {
+            background: rgba(244, 63, 94, 0.15);
+            border: 1px solid rgba(244, 63, 94, 0.4);
+            color: #fda4af;
+            border-radius: 8px;
+            padding: 5px 10px;
+            font-size: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+        .uploaded-audio-info .remove-btn:hover {
+            background: rgba(244, 63, 94, 0.3);
+            color: #fff;
+        }
+
+        /* Uploading progress */
+        .upload-progress {
+            height: 4px;
+            background: rgba(16, 185, 129, 0.2);
+            border-radius: 9999px;
+            overflow: hidden;
+            margin-top: 8px;
+            display: none;
+        }
+        .upload-progress.show { display: block; }
+        .upload-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #10b981, #34d399);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col bg-slate-950 text-slate-100">
 
     <audio id="liveBgMusic" loop></audio>
 
-    <!-- Selection Toast -->
     <div id="selection-toast" class="selection-toast"></div>
 
     <!-- Header -->
@@ -385,7 +490,7 @@
                     <h1 class="text-xl font-bold bg-gradient-to-r from-amber-300 via-pink-400 to-purple-400 bg-clip-text text-transparent">
                         Wish Card Studio
                     </h1>
-                    <p class="text-xs text-slate-400">Custom Backgrounds · Auto-Preview Editing Stage · Telegram Delivery</p>
+                    <p class="text-xs text-slate-400">Custom Backgrounds · Auto-Preview · Audio Upload · Telegram Delivery</p>
                 </div>
             </div>
             
@@ -405,7 +510,6 @@
         <!-- CONTROLS PANEL -->
         <section class="lg:col-span-5 bg-slate-900/80 rounded-2xl border border-slate-800 p-4 sm:p-5 space-y-6 overflow-y-auto max-h-[calc(100vh-100px)]">
             
-            <!-- Tabs -->
             <div class="flex border-b border-slate-800 gap-2 pb-2">
                 <button onclick="switchControlTab('presets')" id="tab-btn-presets" class="flex-1 text-xs font-semibold py-2 rounded-lg bg-amber-500/20 text-amber-300 border border-amber-500/30">🎨 1. Presets & BG</button>
                 <button onclick="switchControlTab('content')" id="tab-btn-content" class="flex-1 text-xs font-semibold py-2 rounded-lg bg-slate-800 text-slate-400 hover:bg-slate-700">✍️ 2. Content</button>
@@ -415,7 +519,6 @@
             <!-- TAB 1: PRESETS -->
             <div id="tab-sec-presets" class="space-y-6">
                 
-                <!-- Background -->
                 <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800 space-y-3">
                     <div class="flex justify-between items-center">
                         <label class="text-xs font-bold text-teal-300 uppercase tracking-wider">🌌 Card Background Color</label>
@@ -470,7 +573,6 @@
                     </div>
                 </div>
 
-                <!-- Bouquet -->
                 <div>
                     <div class="flex justify-between items-center mb-2">
                         <label class="text-xs font-bold text-amber-300 uppercase tracking-wider">🌸 Bouquet Preset (10 Options)</label>
@@ -483,7 +585,6 @@
                     </div>
                 </div>
 
-                <!-- Envelope -->
                 <div class="border-t border-slate-800/80 pt-4">
                     <div class="flex justify-between items-center mb-2">
                         <label class="text-xs font-bold text-rose-300 uppercase tracking-wider">✉️ Envelope Cover (Border & Shadow Free)</label>
@@ -496,7 +597,6 @@
                     </div>
                 </div>
 
-                <!-- Paper -->
                 <div class="border-t border-slate-800/80 pt-4">
                     <div class="flex justify-between items-center mb-2">
                         <label class="text-xs font-bold text-purple-300 uppercase tracking-wider">📜 Paper Card Design (10 Styles)</label>
@@ -595,6 +695,39 @@
 
                 <div class="space-y-2" id="audio-preset-list"></div>
 
+                <!-- ===== NEW: DEVICE AUDIO UPLOAD ===== -->
+                <div class="pt-2 border-t border-slate-800">
+                    <label class="block text-xs font-bold text-emerald-300 uppercase tracking-wider mb-2">📁 Upload Audio from Device</label>
+
+                    <div class="audio-upload-box" id="audio-upload-box"
+                         onclick="document.getElementById('audio-device-input').click()"
+                         ondragover="handleAudioDragOver(event)"
+                         ondragleave="handleAudioDragLeave(event)"
+                         ondrop="handleAudioDrop(event)">
+                        <div class="audio-upload-label">
+                            <i class="fa-solid fa-cloud-arrow-up text-lg"></i>
+                            <span>Click to choose audio file</span>
+                        </div>
+                        <div class="audio-upload-hint">or drag & drop here · MP3, M4A, WAV, OGG</div>
+                        <div class="upload-progress" id="audio-upload-progress">
+                            <div class="upload-progress-bar" id="audio-upload-progress-bar"></div>
+                        </div>
+                    </div>
+                    <input type="file" id="audio-device-input" accept="audio/*,.mp3,.m4a,.wav,.ogg" onchange="handleAudioDeviceUpload(event)" class="hidden">
+
+                    <!-- Uploaded audio info card -->
+                    <div id="uploaded-audio-info" class="uploaded-audio-info hidden">
+                        <div class="icon"><i class="fa-solid fa-music"></i></div>
+                        <div class="details">
+                            <div class="name" id="uploaded-audio-name">-</div>
+                            <div class="meta" id="uploaded-audio-meta">-</div>
+                        </div>
+                        <button class="remove-btn" onclick="removeUploadedAudio()">
+                            <i class="fa-solid fa-trash"></i> Remove
+                        </button>
+                    </div>
+                </div>
+
                 <div class="pt-2 border-t border-slate-800">
                     <label class="block text-xs text-slate-400 mb-1">Custom Audio Direct URL</label>
                     <input type="text" id="input-custom-audio" onchange="setCustomAudio(this.value)" placeholder="https://example.com/song.mp3" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2 text-xs text-amber-200 focus:outline-none focus:border-amber-400">
@@ -626,7 +759,6 @@
 
             <div id="preview-stage" class="flex-1 relative rounded-xl my-2 overflow-hidden flex items-center justify-center" style="background: radial-gradient(circle at center, #2e1065, #0f0728, #05020d);">
                 
-                <!-- Stage badge -->
                 <div id="stage-badge" class="stage-badge bouquet">🌸 Bouquet Stage</div>
 
                 <div id="sparkle-stage" class="absolute inset-0 pointer-events-none overflow-hidden"></div>
@@ -865,7 +997,9 @@
             paperName: PAPER_DESIGNS[0].name,
             cornerStamp: 'https://i.ibb.co/cp6WytW/download-55.jpg',
             audioUrl: AUDIO_PRESETS[0].url,
-            audioName: AUDIO_PRESETS[0].name
+            audioName: AUDIO_PRESETS[0].name,
+            uploadedAudioName: null,
+            uploadedAudioDataUrl: null
         };
 
         /* ============================================================
@@ -874,40 +1008,30 @@
         let currentStage = 'bouquet';
         let autoStageLock = null;
 
-        /**
-         * Switch preview to the given stage: 'bouquet' | 'envelope' | 'card'
-         */
         function focusStage(stage, opts = {}) {
             if (!['bouquet','envelope','card'].includes(stage)) return;
             currentStage = stage;
 
-            // Update visual stages
             document.getElementById('preview-step-start').classList.toggle('hidden', stage !== 'bouquet');
             document.getElementById('preview-step-floating').classList.toggle('hidden', stage !== 'envelope');
             document.getElementById('preview-step-card').classList.toggle('hidden', stage !== 'card');
 
-            // If switching to envelope, replay floating animation
             if (stage === 'envelope') {
                 const cardNode = document.getElementById('prev-falling-card');
                 if (cardNode) {
                     cardNode.style.animation = 'none';
-                    cardNode.offsetHeight; // trigger reflow
+                    cardNode.offsetHeight;
                     cardNode.style.animation = null;
                 }
             }
 
-            // Close nested modal when leaving card stage
             if (stage !== 'card') {
                 closeCornerFullModal();
             }
 
-            // Update stage badge
             updateStageBadge(stage);
-
-            // Update manual tab buttons
             updateStageButtons(stage);
 
-            // Toast (only when from user interaction, not auto)
             if (!opts.silent) {
                 const labels = {
                     bouquet: '🌸 Bouquet Stage Preview',
@@ -942,17 +1066,13 @@
             });
         }
 
-        /**
-         * Called when the user starts editing a category. Auto-locks the stage.
-         * Debounced so it doesn't fight with the user's manual clicks.
-         */
         function autoFocusStage(stage) {
             if (autoStageLock) clearTimeout(autoStageLock);
             autoStageLock = setTimeout(() => {
                 if (currentStage !== stage) {
                     focusStage(stage, { silent: true });
                 }
-            }, 120); // slight delay to allow manual click to override
+            }, 120);
         }
 
         function showToast(message) {
@@ -1163,6 +1283,122 @@
             }
         }
 
+        /* ============================================================
+           DEVICE AUDIO UPLOAD
+           ============================================================ */
+        function handleAudioDragOver(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            document.getElementById('audio-upload-box').classList.add('dragover');
+        }
+
+        function handleAudioDragLeave(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            document.getElementById('audio-upload-box').classList.remove('dragover');
+        }
+
+        function handleAudioDrop(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            document.getElementById('audio-upload-box').classList.remove('dragover');
+            const files = event.dataTransfer.files;
+            if (files && files.length > 0) {
+                processAudioFile(files[0]);
+            }
+        }
+
+        function handleAudioDeviceUpload(event) {
+            const files = event.target.files;
+            if (files && files.length > 0) {
+                processAudioFile(files[0]);
+            }
+        }
+
+        function processAudioFile(file) {
+            const validTypes = ['audio/mpeg', 'audio/mp3', 'audio/mp4', 'audio/m4a', 'audio/wav', 'audio/x-wav', 'audio/ogg', 'audio/x-m4a'];
+            const ext = (file.name.split('.').pop() || '').toLowerCase();
+            const validExts = ['mp3', 'm4a', 'wav', 'ogg', 'mp4'];
+
+            if (!validTypes.includes(file.type) && !validExts.includes(ext)) {
+                alert('ကျေးဇူးပြု၍ MP3, M4A, WAV သို့မဟုတ် OGG ဖိုင် ရွေးပါ။');
+                return;
+            }
+
+            const MAX_MB = 15;
+            if (file.size > MAX_MB * 1024 * 1024) {
+                alert(`ဖိုင်အရွယ်အစား ${MAX_MB}MB ထက် မကျော်ရပါ။ (လက်ရှိ: ${(file.size / (1024*1024)).toFixed(2)}MB)`);
+                return;
+            }
+
+            const progressBox = document.getElementById('audio-upload-progress');
+            const progressBar = document.getElementById('audio-upload-progress-bar');
+            progressBox.classList.add('show');
+            progressBar.style.width = '15%';
+
+            const reader = new FileReader();
+
+            reader.onprogress = function(e) {
+                if (e.lengthComputable) {
+                    const percent = Math.round((e.loaded / e.total) * 100);
+                    progressBar.style.width = Math.max(15, percent) + '%';
+                }
+            };
+
+            reader.onload = function(e) {
+                progressBar.style.width = '100%';
+                state.audioUrl = e.target.result;
+                state.audioName = '📁 ' + file.name;
+                state.uploadedAudioName = file.name;
+                state.uploadedAudioDataUrl = e.target.result;
+
+                renderAudioList();
+                updateStudioAudioPlayer();
+                renderUploadedAudioInfo(file);
+
+                setTimeout(() => {
+                    progressBox.classList.remove('show');
+                    progressBar.style.width = '0%';
+                }, 600);
+
+                showToast('🎵 Audio uploaded: ' + file.name);
+
+                setTimeout(() => {
+                    previewTestAudio(true);
+                }, 200);
+            };
+
+            reader.onerror = function() {
+                alert('ဖိုင်ဖတ်ခြင်း မအောင်မြင်ပါ။');
+                progressBox.classList.remove('show');
+            };
+
+            reader.readAsDataURL(file);
+        }
+
+        function renderUploadedAudioInfo(file) {
+            const info = document.getElementById('uploaded-audio-info');
+            info.classList.remove('hidden');
+            document.getElementById('uploaded-audio-name').textContent = file.name;
+            const sizeMB = (file.size / (1024 * 1024)).toFixed(2);
+            const ext = (file.name.split('.').pop() || '').toUpperCase();
+            document.getElementById('uploaded-audio-meta').textContent = `${ext} · ${sizeMB} MB · Ready`;
+        }
+
+        function removeUploadedAudio() {
+            state.uploadedAudioName = null;
+            state.uploadedAudioDataUrl = null;
+            document.getElementById('uploaded-audio-info').classList.add('hidden');
+            document.getElementById('audio-device-input').value = '';
+
+            // Fall back to default preset
+            state.audioUrl = AUDIO_PRESETS[0].url;
+            state.audioName = AUDIO_PRESETS[0].name;
+            renderAudioList();
+            updateStudioAudioPlayer();
+            showToast('🗑️ Uploaded audio removed — reverted to default');
+        }
+
         function handleCornerDeviceUpload(input) {
             if (input.files && input.files[0]) {
                 const reader = new FileReader();
@@ -1178,7 +1414,7 @@
         }
 
         /* ============================================================
-           UPDATE STUDIO STATE (text, images, background)
+           UPDATE STUDIO STATE
            ============================================================ */
         function updateStudioState() {
             const fontClass = document.getElementById('input-font-family').value;
@@ -1224,7 +1460,7 @@
         }
 
         /* ============================================================
-           STEP TRANSITIONS (manual clicks in preview)
+           STEP TRANSITIONS
            ============================================================ */
         function proceedToStep2() {
             const audioEl = document.getElementById('liveBgMusic');
@@ -1269,9 +1505,6 @@
             showToast('▶ Full flow replay — Bouquet ➔ Envelope ➔ Card');
         }
 
-        /* ============================================================
-           TABS
-           ============================================================ */
         function switchControlTab(tab) {
             document.getElementById('tab-sec-presets').classList.add('hidden');
             document.getElementById('tab-sec-content').classList.add('hidden');
@@ -1310,6 +1543,12 @@
         }
 
         function resetAllDefaults() {
+            // Clear uploaded audio
+            state.uploadedAudioName = null;
+            state.uploadedAudioDataUrl = null;
+            document.getElementById('uploaded-audio-info').classList.add('hidden');
+            document.getElementById('audio-device-input').value = '';
+
             selectBouquet(BOUQUETS[0].url, BOUQUETS[0].name);
             selectEnvelope(ENVELOPES[0].url, ENVELOPES[0].name);
             selectPaper(PAPER_DESIGNS[0].cssClass, PAPER_DESIGNS[0].name);
@@ -1352,6 +1591,9 @@
                     exportBgCss = `background: linear-gradient(${state.gradDirection}, ${state.gradColor1}, ${state.gradColor2});`;
                 }
             }
+
+            // Use uploaded audio (data URL) if present, else preset URL
+            const finalAudioUrl = state.uploadedAudioDataUrl || state.audioUrl;
 
             return `<!DOCTYPE html>
 <html lang="en">
@@ -1538,7 +1780,7 @@
 </head>
 <body class="relative flex items-center justify-center min-h-screen select-none overflow-hidden ${fontClass}">
 
-    <audio id="bgMusic" loop src="${state.audioUrl}"></audio>
+    <audio id="bgMusic" loop src="${finalAudioUrl}"></audio>
 
     <div id="startScreen" class="absolute inset-0 z-40 flex flex-col items-center justify-center cursor-pointer transition-opacity duration-700" onclick="startExperience()">
         <h1 class="text-amber-200 text-lg md:text-xl font-bold tracking-wide drop-shadow-md mb-6 click-hint text-center px-4">
@@ -1675,9 +1917,6 @@
 </html>`;
         }
 
-        /* ============================================================
-           COPY TO CLIPBOARD
-           ============================================================ */
         function fallbackCopy(text) {
             const ta = document.createElement('textarea');
             ta.value = text;
