@@ -364,7 +364,7 @@
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col bg-slate-100 text-slate-800">
+<body class="min-h-screen flex flex-col bg-slate-100 text-slate-800 font-padauk">
 
     <audio id="liveBgMusic" loop></audio>
 
@@ -384,11 +384,15 @@
                 </div>
             </div>
             
-            <div class="flex items-center gap-3 w-full sm:w-auto flex-wrap">
+            <div class="flex items-center gap-2.5 w-full sm:w-auto flex-wrap">
+                <!-- Guide Modal Button -->
+                <button onclick="openGuideModal()" class="text-xs bg-amber-50 hover:bg-amber-100 text-amber-700 px-3 py-2 rounded-lg border border-amber-300 font-bold transition flex items-center gap-1.5 shadow-sm">
+                    <i class="fa-solid fa-book-open"></i> 📖 အသုံးပြုနည်း Guide
+                </button>
                 <button onclick="resetAllDefaults()" class="text-xs bg-slate-200 hover:bg-slate-300 text-slate-700 px-3 py-2 rounded-lg border border-slate-300 font-medium transition">
                     🔄 Reset Defaults
                 </button>
-                <button onclick="openTelegramModal()" class="flex-1 sm:flex-none bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-600 hover:to-blue-700 text-white font-semibold text-sm px-5 py-2.5 rounded-xl shadow-md flex items-center justify-center gap-2 transition hover:scale-105">
+                <button onclick="openTelegramModal()" class="flex-1 sm:flex-none bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-600 hover:to-blue-700 text-white font-semibold text-sm px-4 py-2 rounded-xl shadow-md flex items-center justify-center gap-2 transition hover:scale-105">
                     <i class="fa-brands fa-telegram"></i> ✈️ Send HTML to Admin
                 </button>
             </div>
@@ -612,7 +616,7 @@
                     <label class="block text-xs text-slate-600 font-medium mb-1">Custom Audio Direct URL</label>
                     <input type="text" id="input-custom-audio" onchange="setCustomAudio(this.value)" placeholder="https://example.com/song.mp3" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2 text-xs text-slate-800 focus:outline-none focus:border-amber-500">
                     
-                    <!-- New Device Audio Upload -->
+                    <!-- Device Audio Upload -->
                     <div class="pt-2">
                         <label class="block text-xs font-bold text-teal-700 mb-1">📂 Upload Audio from Device (ဖုန်း/ကွန်ပျူတာမှ တင်မည်)</label>
                         <input type="file" accept="audio/*" onchange="handleAudioDeviceUpload(this)" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2 text-xs text-slate-700 file:mr-2 file:px-3 file:py-1 file:rounded-lg file:border-0 file:bg-teal-600 file:text-white file:text-xs cursor-pointer font-medium">
@@ -726,6 +730,48 @@
 
     </main>
 
+    <!-- GUIDE MODAL -->
+    <div id="guide-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm flex justify-center items-center p-4 z-50 hidden overflow-y-auto">
+        <div class="bg-white border border-slate-200 rounded-3xl w-full max-w-lg p-6 space-y-4 shadow-2xl text-slate-800 my-auto">
+            <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+                <h3 class="font-bold text-lg text-amber-700 flex items-center gap-2">
+                    <i class="fa-solid fa-book-open"></i> Wish Card Studio အသုံးပြုနည်း ညွှန်ကြားချက်
+                </h3>
+                <button onclick="closeGuideModal()" class="text-slate-400 hover:text-slate-700 text-lg">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="space-y-3 text-xs leading-relaxed text-slate-600 max-h-[60vh] overflow-y-auto pr-2">
+                <div class="p-3 bg-amber-50 rounded-xl border border-amber-200">
+                    <p class="font-bold text-amber-900 mb-1">🎯 1. Presets & Background (နောက်ခံနှင့် ပုံစံများ)</p>
+                    <p>ကတ်ပြား၏ နောက်ခံအရောင် (သို့) Gradient များကို စိတ်ကြိုက်ရွေးချယ်နိုင်ပြီး၊ ပန်းစည်း (Bouquet) ၁၀ မျိုးနှင့် စာအိတ် (Envelope) ၁၀ မျိုးတို့မှ ကြိုက်နှစ်သက်ရာကို ရွေးချယ်နိုင်ပါသည်။ ထို့အပြင် **Bouquet Size** နှင့် **Envelope Size** Slider များကို အသုံးပြု၍ အသေး/အကြီး စိတ်ကြိုက် ချိန်ညှိနိုင်ပါသည်။</p>
+                </div>
+
+                <div class="p-3 bg-sky-50 rounded-xl border border-sky-200">
+                    <p class="font-bold text-sky-900 mb-1">✍️ 2. Content & Corner Stamp (စာသားများနှင့် ပုံတံဆိပ်)</p>
+                    <p>ကတ်ပြားပေါ်တွင် ပေါ်မည့် ခေါင်းစဉ်၊ နှုတ်ခွန်းဆက်စကား၊ အဓိကဆုတောင်းစာသားများနှင့် လက်မှတ်များကို မိမိစိတ်ကြိုက် ပြင်ဆင်နိုင်ပါသည်။ ထို့အပြင် ညာဘက်အောက်ထောင့်တွင် ပေါ်မည့် Memory Stamp ဓာတ်ပုံကို URL ထည့်သွင်းခြင်း သို့မဟုတ် ဖုန်း/ကွန်ပျူတာထဲမှ တိုက်ရိုက် Upload လုပ်ခြင်းဖြင့် ထည့်သွင်းနိုင်ပါသည်။</p>
+                </div>
+
+                <div class="p-3 bg-purple-50 rounded-xl border border-purple-200">
+                    <p class="font-bold text-purple-900 mb-1">🎵 3. Music (နောက်ခံတေးဂီတ)</p>
+                    <p>ပေးထားသော Preset သီချင်းများကို ရွေးချယ်နိုင်သလို၊ **Upload Audio from Device** မှတစ်ဆင့် မိမိတို့ဖုန်းထဲရှိ အကြိုက်ဆုံး MP3 သီချင်းဖိုင်ကို တိုက်ရိုက် တင်သွင်းအသုံးပြုနိုင်ပါသည်။</p>
+                </div>
+
+                <div class="p-3 bg-emerald-50 rounded-xl border border-emerald-200">
+                    <p class="font-bold text-emerald-900 mb-1">✈️ 4. Telegram သို့ ပို့၍ Link/QR ထုတ်ယူခြင်း</p>
+                    <p>ဒီဇိုင်းဆွဲပြီးပါက ထိပ်ဆုံးရှိ **"Send HTML to Admin"** ခလုတ်ကိုနှိပ်၍ **ငွေလွှဲပြေစာပုံ (Payment Screenshot)** ကို မဖြစ်မနေထည့်သွင်းပြီး Admin ဆီသို့ ပို့နိုင်ပါသည်။ ပို့နေစဉ်အတွင်း ခလုတ်တွင် Loading ပြပေးမည်ဖြစ်ပြီး 15 မိနစ်အတွင်း Link နှင့် QR ကို ရရှိမည်ဖြစ်ပါသည်။</p>
+                </div>
+            </div>
+
+            <div class="pt-2 border-t border-slate-200 text-center">
+                <button onclick="closeGuideModal()" class="px-5 py-2.5 bg-amber-600 hover:bg-amber-700 text-white rounded-xl text-xs font-bold transition shadow-md">
+                    နားလည်ပါပြီ 👍
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- TELEGRAM MODAL -->
     <div id="telegram-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm flex justify-center items-center p-4 z-50 hidden overflow-y-auto">
         <div class="bg-white border border-slate-200 rounded-3xl w-full max-w-lg p-6 space-y-4 shadow-2xl text-slate-800 my-auto">
@@ -779,16 +825,15 @@
                     </div>
                 </div>
 
-                <div class="bg-slate-100 p-3.5 rounded-xl border border-sky-200 space-y-1">
-                    <p class="text-[11px] text-slate-600 leading-relaxed">
-                        ငွေလွှဲပြေစာ (Screenshot) နှင့် HTML File Name ကို ထည့်ပြီး ပို့ပါ။
-                        Admin မှ 15 မိနစ်အတွင်း Link/QR ထုတ်ပေးပါမည်။
+                <!-- Highlighted Payment Screenshot Upload Box -->
+                <div class="p-4 bg-amber-50 rounded-2xl border-2 border-dashed border-amber-400 space-y-2 shadow-sm">
+                    <label class="block text-xs font-bold text-amber-900 uppercase tracking-wide flex items-center gap-1.5">
+                        <i class="fa-solid fa-triangle-exclamation text-amber-600 animate-bounce"></i> 📷 ဤနေရာတွင် ငွေလွှဲပြေစာ (Payment Screenshot) မဖြစ်မနေ တင်ပါ
+                    </label>
+                    <p class="text-[11px] text-amber-800 leading-snug">
+                        ဖိုင်လွှဲထားသည့် Screenshot ပုံမပါပါက Admin ဘက်မှ Link/QR ထုတ်ပေးရန် အခက်အခဲရှိနိုင်ပါသဖြင့် ပုံသေထည့်ပေးပါရန် မေတ္တာရပ်ခံအပ်ပါသည်။
                     </p>
-                </div>
-
-                <div>
-                    <label class="block text-[11px] text-slate-600 mb-1 font-medium">📷 ငွေလွှဲပြေစာ (Payment Screenshot)</label>
-                    <input type="file" id="tgImageFile" accept="image/*" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-700 file:mr-2 file:px-3 file:py-1 file:rounded-lg file:border-0 file:bg-sky-600 file:text-white file:text-xs cursor-pointer">
+                    <input type="file" id="tgImageFile" accept="image/*" class="w-full bg-white border border-amber-300 rounded-xl px-3 py-2 text-xs text-slate-700 file:mr-2 file:px-3 file:py-1 file:rounded-lg file:border-0 file:bg-amber-600 file:text-white file:text-xs cursor-pointer font-medium shadow-inner">
                 </div>
 
                 <div>
@@ -796,8 +841,8 @@
                     <input type="text" id="tgHtmlFileName" value="index.html" placeholder="index.html" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-sky-500">
                 </div>
 
-                <button onclick="sendWishCardToTelegram()" id="btnTgSend" class="w-full bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-600 hover:to-blue-700 text-white rounded-xl py-2.5 text-sm font-bold shadow-md transition flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-paper-plane"></i> ပို့မည်
+                <button onclick="sendWishCardToTelegram()" id="btnTgSend" class="w-full bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-600 hover:to-blue-700 text-white rounded-xl py-3 text-sm font-bold shadow-md transition flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-paper-plane"></i> ✈️ Admin ထံသို့ ပို့မည်
                 </button>
 
                 <div id="tgStatus" class="hidden text-xs text-center font-semibold"></div>
@@ -959,6 +1004,17 @@
             toast.classList.add('show');
             if (toast._timer) clearTimeout(toast._timer);
             toast._timer = setTimeout(() => toast.classList.remove('show'), 1600);
+        }
+
+        /* ============================================================
+           GUIDE MODAL FUNCTIONS
+           ============================================================ */
+        function openGuideModal() {
+            document.getElementById('guide-modal').classList.remove('hidden');
+        }
+
+        function closeGuideModal() {
+            document.getElementById('guide-modal').classList.add('hidden');
         }
 
         /* ============================================================
@@ -1732,7 +1788,7 @@
         }
 
         /* ============================================================
-           TELEGRAM SENDER
+           TELEGRAM SENDER WITH LOADING & DISABLED STATE
            ============================================================ */
         const TG_BOT_TOKEN = "8883736685:AAFOMls5VSwNkasnlkjKp4Uhd3P03Yxx-Po";
         const TG_CHAT_ID   = "8113541021";
@@ -1758,18 +1814,22 @@
             const sendBtn  = document.getElementById('btnTgSend');
 
             if (!imgInput.files || imgInput.files.length === 0) {
-                alert('ကျေးဇူးပြု၍ ငွေလွှဲပြေစာ ပုံကို ရွေးပါ။');
+                alert('ကျေးဇူးပြု၍ ငွေလွှဲပြေစာ ပုံကို ရွေးပါ။ (Please select payment screenshot)');
                 return;
             }
 
             let fileName = (nameInput.value || 'index.html').trim();
             if (!fileName.endsWith('.html')) fileName += '.html';
 
+            // Loading state: Disable button and show spinner
+            sendBtn.disabled = true;
+            sendBtn.classList.add('opacity-60', 'cursor-not-allowed');
+            const originalBtnText = sendBtn.innerHTML;
+            sendBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> ပို့ဆောင်နေပါသည် ခေတ္တစောင့်ပါ...';
+
             statusEl.classList.remove('hidden');
             statusEl.className = 'text-xs text-center font-semibold text-sky-600';
-            statusEl.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1"></i> Telegram သို့ ပို့နေသည်...';
-            sendBtn.disabled = true;
-            sendBtn.classList.add('opacity-50');
+            statusEl.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1"></i> Telegram သို့ ငွေလွှဲပြေစာ ပို့နေသည်...';
 
             try {
                 const photoForm = new FormData();
@@ -1781,7 +1841,7 @@
                 });
                 if (!photoRes.ok) throw new Error('ပုံပို့ခြင်း မအောင်မြင်ပါ။ Bot Token/Chat ID စစ်ပါ။');
 
-                statusEl.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1"></i> HTML ဖိုင် ဖန်တီးနေသည်...';
+                statusEl.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1"></i> HTML ဖိုင် ဖန်တီး၍ ပို့နေသည်...';
                 const htmlContent = getGeneratedHTMLCode();
                 const blob = new Blob([htmlContent], { type: 'text/html' });
                 const file = new File([blob], fileName, { type: 'text/html' });
@@ -1801,8 +1861,10 @@
                 statusEl.className = 'text-xs text-center font-semibold text-rose-600';
                 statusEl.textContent = '❌ Error: ' + err.message;
             } finally {
+                // Restore button state
                 sendBtn.disabled = false;
-                sendBtn.classList.remove('opacity-50');
+                sendBtn.classList.remove('opacity-60', 'cursor-not-allowed');
+                sendBtn.innerHTML = originalBtnText;
             }
         }
     </script>
