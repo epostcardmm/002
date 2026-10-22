@@ -12,8 +12,8 @@
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background: #0f172a;
-            color: #f8fafc;
+            background: #f1f5f9;
+            color: #1e293b;
         }
 
         .font-cursive { font-family: 'Great Vibes', cursive; }
@@ -21,8 +21,8 @@
         .font-padauk { font-family: 'Padauk', sans-serif; }
 
         ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: rgba(15, 23, 42, 0.6); }
-        ::-webkit-scrollbar-thumb { background: rgba(148, 163, 184, 0.3); border-radius: 4px; }
+        ::-webkit-scrollbar-track { background: rgba(241, 245, 249, 0.8); }
+        ::-webkit-scrollbar-thumb { background: rgba(203, 213, 225, 0.8); border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: rgba(245, 158, 11, 0.6); }
 
         /* --- PRESET PAPER DESIGNS --- */
@@ -294,7 +294,7 @@
             color: #991b1b;
         }
 
-        /* --- STAGE BADGE --- */
+        /* --- CONTEXT-AWARE PREVIEW STAGE INDICATOR --- */
         .stage-badge {
             position: absolute;
             top: 12px;
@@ -314,34 +314,31 @@
         }
         .stage-badge.bouquet {
             background: rgba(251, 191, 36, 0.18);
-            color: #fcd34d;
+            color: #b45309;
             border: 1px solid rgba(251, 191, 36, 0.5);
         }
         .stage-badge.envelope {
             background: rgba(244, 114, 182, 0.18);
-            color: #f9a8d4;
+            color: #9d174d;
             border: 1px solid rgba(244, 114, 182, 0.5);
         }
         .stage-badge.paper {
             background: rgba(168, 85, 247, 0.18);
-            color: #d8b4fe;
+            color: #6b21a8;
             border: 1px solid rgba(168, 85, 247, 0.5);
         }
-        .stage-badge.card {
-            background: rgba(16, 185, 129, 0.18);
-            color: #6ee7b7;
-            border: 1px solid rgba(16, 185, 129, 0.5);
-        }
 
+        /* Selection highlight animation */
         .preset-pulse {
             animation: presetPulse 0.9s ease-out;
         }
         @keyframes presetPulse {
-            0% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(251, 191, 36, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0); }
+            0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(245, 158, 11, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
         }
 
+        /* Small floating badge on selection */
         .selection-toast {
             position: fixed;
             bottom: 30px;
@@ -365,140 +362,33 @@
             transform: translateX(-50%) translateY(0);
             opacity: 1;
         }
-
-        /* --- AUDIO UPLOAD BOX --- */
-        .audio-upload-box {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(5, 150, 105, 0.05));
-            border: 1.5px dashed rgba(16, 185, 129, 0.5);
-            border-radius: 14px;
-            padding: 14px;
-            text-align: center;
-            transition: all 0.25s ease;
-            cursor: pointer;
-        }
-        .audio-upload-box:hover {
-            border-color: rgba(52, 211, 153, 0.8);
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(5, 150, 105, 0.08));
-        }
-        .audio-upload-box.dragover {
-            border-color: #34d399;
-            background: rgba(16, 185, 129, 0.2);
-            transform: scale(1.01);
-        }
-        .audio-upload-label {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            color: #6ee7b7;
-            font-size: 12px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-        .audio-upload-hint {
-            color: #64748b;
-            font-size: 10px;
-            margin-top: 6px;
-        }
-
-        /* Uploaded audio info card */
-        .uploaded-audio-info {
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid rgba(16, 185, 129, 0.4);
-            border-radius: 12px;
-            padding: 10px 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-top: 10px;
-        }
-        .uploaded-audio-info .icon {
-            width: 36px; height: 36px;
-            border-radius: 10px;
-            background: linear-gradient(135deg, #10b981, #059669);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 16px;
-            flex-shrink: 0;
-        }
-        .uploaded-audio-info .details {
-            flex: 1;
-            min-width: 0;
-        }
-        .uploaded-audio-info .name {
-            color: #6ee7b7;
-            font-size: 12px;
-            font-weight: 600;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .uploaded-audio-info .meta {
-            color: #94a3b8;
-            font-size: 10px;
-            margin-top: 2px;
-        }
-        .uploaded-audio-info .remove-btn {
-            background: rgba(244, 63, 94, 0.15);
-            border: 1px solid rgba(244, 63, 94, 0.4);
-            color: #fda4af;
-            border-radius: 8px;
-            padding: 5px 10px;
-            font-size: 10px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.2s;
-            flex-shrink: 0;
-        }
-        .uploaded-audio-info .remove-btn:hover {
-            background: rgba(244, 63, 94, 0.3);
-            color: #fff;
-        }
-
-        /* Uploading progress */
-        .upload-progress {
-            height: 4px;
-            background: rgba(16, 185, 129, 0.2);
-            border-radius: 9999px;
-            overflow: hidden;
-            margin-top: 8px;
-            display: none;
-        }
-        .upload-progress.show { display: block; }
-        .upload-progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, #10b981, #34d399);
-            width: 0%;
-            transition: width 0.3s ease;
-        }
     </style>
 </head>
-<body class="min-h-screen flex flex-col bg-slate-950 text-slate-100">
+<body class="min-h-screen flex flex-col bg-slate-100 text-slate-800">
 
     <audio id="liveBgMusic" loop></audio>
 
+    <!-- Selection Toast -->
     <div id="selection-toast" class="selection-toast"></div>
 
     <!-- Header -->
-    <header class="bg-slate-900/90 border-b border-slate-800 p-4 sticky top-0 z-50 backdrop-blur-md shadow-xl">
+    <header class="bg-white/90 border-b border-slate-200 p-4 sticky top-0 z-50 backdrop-blur-md shadow-sm">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
             <div class="flex items-center gap-3">
                 <span class="text-3xl">🎁</span>
                 <div>
-                    <h1 class="text-xl font-bold bg-gradient-to-r from-amber-300 via-pink-400 to-purple-400 bg-clip-text text-transparent">
+                    <h1 class="text-xl font-bold bg-gradient-to-r from-amber-600 via-pink-600 to-purple-600 bg-clip-text text-transparent">
                         Wish Card Studio
                     </h1>
-                    <p class="text-xs text-slate-400">Custom Backgrounds · Auto-Preview · Audio Upload · Telegram Delivery</p>
+                    <p class="text-xs text-slate-500">Custom Backgrounds · Auto-Preview Editing Stage · Telegram Delivery</p>
                 </div>
             </div>
             
             <div class="flex items-center gap-3 w-full sm:w-auto flex-wrap">
-                <button onclick="resetAllDefaults()" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-2 rounded-lg border border-slate-700 transition">
+                <button onclick="resetAllDefaults()" class="text-xs bg-slate-200 hover:bg-slate-300 text-slate-700 px-3 py-2 rounded-lg border border-slate-300 font-medium transition">
                     🔄 Reset Defaults
                 </button>
-                <button onclick="openTelegramModal()" class="flex-1 sm:flex-none bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-600 hover:to-blue-700 text-white font-semibold text-sm px-5 py-2.5 rounded-xl shadow-lg flex items-center justify-center gap-2 transition hover:scale-105">
+                <button onclick="openTelegramModal()" class="flex-1 sm:flex-none bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-600 hover:to-blue-700 text-white font-semibold text-sm px-5 py-2.5 rounded-xl shadow-md flex items-center justify-center gap-2 transition hover:scale-105">
                     <i class="fa-brands fa-telegram"></i> ✈️ Send HTML to Admin
                 </button>
             </div>
@@ -508,52 +398,54 @@
     <main class="flex-1 max-w-7xl w-full mx-auto p-4 grid grid-cols-1 lg:grid-cols-12 gap-6">
 
         <!-- CONTROLS PANEL -->
-        <section class="lg:col-span-5 bg-slate-900/80 rounded-2xl border border-slate-800 p-4 sm:p-5 space-y-6 overflow-y-auto max-h-[calc(100vh-100px)]">
+        <section class="lg:col-span-5 bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 space-y-6 overflow-y-auto max-h-[calc(100vh-100px)] shadow-sm">
             
-            <div class="flex border-b border-slate-800 gap-2 pb-2">
-                <button onclick="switchControlTab('presets')" id="tab-btn-presets" class="flex-1 text-xs font-semibold py-2 rounded-lg bg-amber-500/20 text-amber-300 border border-amber-500/30">🎨 1. Presets & BG</button>
-                <button onclick="switchControlTab('content')" id="tab-btn-content" class="flex-1 text-xs font-semibold py-2 rounded-lg bg-slate-800 text-slate-400 hover:bg-slate-700">✍️ 2. Content</button>
-                <button onclick="switchControlTab('audio')" id="tab-btn-audio" class="flex-1 text-xs font-semibold py-2 rounded-lg bg-slate-800 text-slate-400 hover:bg-slate-700">🎵 3. Music</button>
+            <!-- Tabs -->
+            <div class="flex border-b border-slate-200 gap-2 pb-2">
+                <button onclick="switchControlTab('presets')" id="tab-btn-presets" class="flex-1 text-xs font-semibold py-2 rounded-lg bg-amber-50 text-amber-800 border border-amber-300">🎨 1. Presets & BG</button>
+                <button onclick="switchControlTab('content')" id="tab-btn-content" class="flex-1 text-xs font-semibold py-2 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200">✍️ 2. Content</button>
+                <button onclick="switchControlTab('audio')" id="tab-btn-audio" class="flex-1 text-xs font-semibold py-2 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200">🎵 3. Music</button>
             </div>
 
             <!-- TAB 1: PRESETS -->
             <div id="tab-sec-presets" class="space-y-6">
                 
-                <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800 space-y-3">
+                <!-- Background -->
+                <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 space-y-3">
                     <div class="flex justify-between items-center">
-                        <label class="text-xs font-bold text-teal-300 uppercase tracking-wider">🌌 Card Background Color</label>
-                        <div class="flex bg-slate-900 p-0.5 rounded-lg border border-slate-800 text-[11px]">
-                            <button onclick="setBgMode('single')" id="bg-mode-single" class="px-2.5 py-1 rounded-md font-semibold bg-teal-500/20 text-teal-300 transition">Single</button>
-                            <button onclick="setBgMode('gradient')" id="bg-mode-gradient" class="px-2.5 py-1 rounded-md text-slate-400 transition">Gradient</button>
+                        <label class="text-xs font-bold text-teal-700 uppercase tracking-wider">🌌 Card Background Color</label>
+                        <div class="flex bg-slate-200 p-0.5 rounded-lg border border-slate-300 text-[11px]">
+                            <button onclick="setBgMode('single')" id="bg-mode-single" class="px-2.5 py-1 rounded-md font-semibold bg-white text-teal-800 shadow-sm transition">Single</button>
+                            <button onclick="setBgMode('gradient')" id="bg-mode-gradient" class="px-2.5 py-1 rounded-md text-slate-600 transition">Gradient</button>
                         </div>
                     </div>
 
                     <div id="bg-single-box" class="flex items-center gap-3 pt-1">
-                        <input type="color" id="input-bg-single" value="#0f0728" oninput="updateStudioState()" onfocus="focusStage('bouquet')" class="w-10 h-8 rounded bg-transparent cursor-pointer border border-slate-700">
-                        <span class="text-xs text-slate-300">Choose Single Color</span>
+                        <input type="color" id="input-bg-single" value="#0f0728" oninput="updateStudioState()" onfocus="focusStage('bouquet')" class="w-10 h-8 rounded bg-transparent cursor-pointer border border-slate-300">
+                        <span class="text-xs text-slate-700">Choose Single Color</span>
                     </div>
 
                     <div id="bg-gradient-box" class="hidden space-y-3 pt-1">
                         <div class="grid grid-cols-2 gap-2">
                             <div>
-                                <label class="block text-[11px] text-slate-400 mb-1">Color 1 (Start)</label>
+                                <label class="block text-[11px] text-slate-500 mb-1">Color 1 (Start)</label>
                                 <div class="flex items-center gap-2">
-                                    <input type="color" id="input-bg-grad1" value="#2e1065" oninput="updateStudioState()" onfocus="focusStage('bouquet')" class="w-8 h-7 rounded bg-transparent cursor-pointer border border-slate-700">
-                                    <input type="text" id="text-bg-grad1" value="#2e1065" oninput="syncColorText(this, 'input-bg-grad1')" onfocus="focusStage('bouquet')" class="w-full bg-slate-900 border border-slate-800 rounded px-2 py-1 text-xs text-slate-200">
+                                    <input type="color" id="input-bg-grad1" value="#2e1065" oninput="updateStudioState()" onfocus="focusStage('bouquet')" class="w-8 h-7 rounded bg-transparent cursor-pointer border border-slate-300">
+                                    <input type="text" id="text-bg-grad1" value="#2e1065" oninput="syncColorText(this, 'input-bg-grad1')" onfocus="focusStage('bouquet')" class="w-full bg-white border border-slate-300 rounded px-2 py-1 text-xs text-slate-800">
                                 </div>
                             </div>
                             <div>
-                                <label class="block text-[11px] text-slate-400 mb-1">Color 2 (End)</label>
+                                <label class="block text-[11px] text-slate-500 mb-1">Color 2 (End)</label>
                                 <div class="flex items-center gap-2">
-                                    <input type="color" id="input-bg-grad2" value="#05020d" oninput="updateStudioState()" onfocus="focusStage('bouquet')" class="w-8 h-7 rounded bg-transparent cursor-pointer border border-slate-700">
-                                    <input type="text" id="text-bg-grad2" value="#05020d" oninput="syncColorText(this, 'input-bg-grad2')" onfocus="focusStage('bouquet')" class="w-full bg-slate-900 border border-slate-800 rounded px-2 py-1 text-xs text-slate-200">
+                                    <input type="color" id="input-bg-grad2" value="#05020d" oninput="updateStudioState()" onfocus="focusStage('bouquet')" class="w-8 h-7 rounded bg-transparent cursor-pointer border border-slate-300">
+                                    <input type="text" id="text-bg-grad2" value="#05020d" oninput="syncColorText(this, 'input-bg-grad2')" onfocus="focusStage('bouquet')" class="w-full bg-white border border-slate-300 rounded px-2 py-1 text-xs text-slate-800">
                                 </div>
                             </div>
                         </div>
 
                         <div>
-                            <label class="block text-[11px] text-slate-400 mb-1">Gradient Direction</label>
-                            <select id="input-bg-direction" onchange="updateStudioState()" onfocus="focusStage('bouquet')" class="w-full bg-slate-900 border border-slate-800 rounded-lg p-1.5 text-xs text-teal-200 focus:outline-none">
+                            <label class="block text-[11px] text-slate-500 mb-1">Gradient Direction</label>
+                            <select id="input-bg-direction" onchange="updateStudioState()" onfocus="focusStage('bouquet')" class="w-full bg-white border border-slate-300 rounded-lg p-1.5 text-xs text-teal-800 focus:outline-none">
                                 <option value="circle at center">Radial (Center Glow)</option>
                                 <option value="to bottom">Linear (Top to Bottom)</option>
                                 <option value="to right">Linear (Left to Right)</option>
@@ -562,45 +454,66 @@
                         </div>
 
                         <div>
-                            <span class="block text-[10px] text-slate-400 mb-1.5">Quick Gradients:</span>
+                            <span class="block text-[10px] text-slate-500 mb-1.5">Quick Gradients:</span>
                             <div class="grid grid-cols-4 gap-1.5">
-                                <button onclick="setQuickGradient('#2e1065', '#05020d', 'circle at center'); focusStage('bouquet');" class="h-6 rounded bg-gradient-to-r from-purple-900 to-slate-950 border border-slate-700 text-[9px] text-slate-300">Midnight</button>
-                                <button onclick="setQuickGradient('#4c0519', '#18181b', 'circle at center'); focusStage('bouquet');" class="h-6 rounded bg-gradient-to-r from-rose-950 to-zinc-900 border border-slate-700 text-[9px] text-slate-300">Rose Dark</button>
-                                <button onclick="setQuickGradient('#064e3b', '#022c22', 'circle at center'); focusStage('bouquet');" class="h-6 rounded bg-gradient-to-r from-emerald-900 to-slate-950 border border-slate-700 text-[9px] text-slate-300">Emerald</button>
-                                <button onclick="setQuickGradient('#311042', '#0f172a', '135deg'); focusStage('bouquet');" class="h-6 rounded bg-gradient-to-r from-indigo-950 to-slate-900 border border-slate-700 text-[9px] text-slate-300">Purple Blue</button>
+                                <button onclick="setQuickGradient('#2e1065', '#05020d', 'circle at center'); focusStage('bouquet');" class="h-6 rounded bg-gradient-to-r from-purple-900 to-slate-950 border border-slate-300 text-[9px] text-white">Midnight</button>
+                                <button onclick="setQuickGradient('#4c0519', '#18181b', 'circle at center'); focusStage('bouquet');" class="h-6 rounded bg-gradient-to-r from-rose-950 to-zinc-900 border border-slate-300 text-[9px] text-white">Rose Dark</button>
+                                <button onclick="setQuickGradient('#064e3b', '#022c22', 'circle at center'); focusStage('bouquet');" class="h-6 rounded bg-gradient-to-r from-emerald-900 to-slate-950 border border-slate-300 text-[9px] text-white">Emerald</button>
+                                <button onclick="setQuickGradient('#311042', '#0f172a', '135deg'); focusStage('bouquet');" class="h-6 rounded bg-gradient-to-r from-indigo-950 to-slate-900 border border-slate-300 text-[9px] text-white">Purple Blue</button>
                             </div>
                         </div>
                     </div>
                 </div>
 
+                <!-- Bouquet -->
                 <div>
                     <div class="flex justify-between items-center mb-2">
-                        <label class="text-xs font-bold text-amber-300 uppercase tracking-wider">🌸 Bouquet Preset (10 Options)</label>
-                        <span id="bouquet-selected-name" class="text-[11px] text-slate-400">Selected: Animated Sparkle</span>
+                        <label class="text-xs font-bold text-amber-700 uppercase tracking-wider">🌸 Bouquet Preset (10 Options)</label>
+                        <span id="bouquet-selected-name" class="text-[11px] text-slate-500">Selected: Animated Sparkle</span>
                     </div>
                     <div class="grid grid-cols-5 gap-2" id="bouquet-grid"></div>
                     
-                    <div class="mt-2">
-                        <input type="text" id="custom-bouquet-url" onchange="setCustomBouquet(this.value)" onfocus="focusStage('bouquet')" placeholder="Or enter custom Bouquet Image/GIF URL..." class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2 text-xs text-amber-200 focus:outline-none focus:border-amber-400">
+                    <div class="mt-2 space-y-2">
+                        <input type="text" id="custom-bouquet-url" onchange="setCustomBouquet(this.value)" onfocus="focusStage('bouquet')" placeholder="Or enter custom Bouquet Image/GIF URL..." class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2 text-xs text-slate-800 focus:outline-none focus:border-amber-500">
+                        
+                        <!-- Bouquet Size Control -->
+                        <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-1.5">
+                            <div class="flex justify-between items-center text-xs">
+                                <span class="text-amber-800 font-semibold">🌸 Bouquet Size (ပန်းစည်းအရွယ်အစား)</span>
+                                <span id="bouquet-size-val" class="text-slate-700 font-mono">180px</span>
+                            </div>
+                            <input type="range" id="input-bouquet-size" min="100" max="350" value="180" oninput="updateStudioState()" onfocus="focusStage('bouquet')" class="w-full accent-amber-500 cursor-pointer">
+                        </div>
                     </div>
                 </div>
 
-                <div class="border-t border-slate-800/80 pt-4">
+                <!-- Envelope -->
+                <div class="border-t border-slate-200 pt-4">
                     <div class="flex justify-between items-center mb-2">
-                        <label class="text-xs font-bold text-rose-300 uppercase tracking-wider">✉️ Envelope Cover (Border & Shadow Free)</label>
-                        <span id="envelope-selected-name" class="text-[11px] text-slate-400">Selected: Golden Sparkle</span>
+                        <label class="text-xs font-bold text-rose-700 uppercase tracking-wider">✉️ Envelope Cover (Border & Shadow Free)</label>
+                        <span id="envelope-selected-name" class="text-[11px] text-slate-500">Selected: Golden Sparkle</span>
                     </div>
                     <div class="grid grid-cols-5 gap-2" id="envelope-grid"></div>
 
-                    <div class="mt-2">
-                        <input type="text" id="custom-envelope-url" onchange="setCustomEnvelope(this.value)" onfocus="focusStage('envelope')" placeholder="Or enter custom Photo/Envelope Image URL..." class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2 text-xs text-rose-200 focus:outline-none focus:border-amber-400">
+                    <div class="mt-2 space-y-2">
+                        <input type="text" id="custom-envelope-url" onchange="setCustomEnvelope(this.value)" onfocus="focusStage('envelope')" placeholder="Or enter custom Photo/Envelope Image URL..." class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2 text-xs text-slate-800 focus:outline-none focus:border-amber-500">
+                        
+                        <!-- Envelope Size Control -->
+                        <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-1.5">
+                            <div class="flex justify-between items-center text-xs">
+                                <span class="text-rose-800 font-semibold">✉️ Envelope Size (စာအိတ်အရွယ်အစား)</span>
+                                <span id="envelope-size-val" class="text-slate-700 font-mono">160px</span>
+                            </div>
+                            <input type="range" id="input-envelope-size" min="100" max="350" value="160" oninput="updateStudioState()" onfocus="focusStage('envelope')" class="w-full accent-rose-500 cursor-pointer">
+                        </div>
                     </div>
                 </div>
 
-                <div class="border-t border-slate-800/80 pt-4">
+                <!-- Paper -->
+                <div class="border-t border-slate-200 pt-4">
                     <div class="flex justify-between items-center mb-2">
-                        <label class="text-xs font-bold text-purple-300 uppercase tracking-wider">📜 Paper Card Design (10 Styles)</label>
-                        <span id="paper-selected-name" class="text-[11px] text-slate-400">Selected: Vintage Parchment</span>
+                        <label class="text-xs font-bold text-purple-700 uppercase tracking-wider">📜 Paper Card Design (10 Styles)</label>
+                        <span id="paper-selected-name" class="text-[11px] text-slate-500">Selected: Vintage Parchment</span>
                     </div>
                     <div class="grid grid-cols-2 sm:grid-cols-5 gap-2" id="paper-grid"></div>
                 </div>
@@ -609,17 +522,17 @@
 
             <!-- TAB 2: CONTENT -->
             <div id="tab-sec-content" class="hidden space-y-4">
-                <h3 class="text-xs font-bold text-amber-300 uppercase tracking-wider border-b border-slate-800 pb-2">✏️ Text & Corner Photo Stamp</h3>
+                <h3 class="text-xs font-bold text-amber-700 uppercase tracking-wider border-b border-slate-200 pb-2">✏️ Text & Corner Photo Stamp</h3>
 
-                <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800 space-y-3">
-                    <label class="block text-xs font-bold text-pink-300 uppercase">📌 Bottom-Right Corner Stamp Photo</label>
+                <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 space-y-3">
+                    <label class="block text-xs font-bold text-pink-700 uppercase">📌 Bottom-Right Corner Stamp Photo</label>
                     
                     <div class="flex items-center gap-3">
-                        <img id="corner-thumb-preview" src="" class="w-12 h-12 object-cover rounded-lg border border-slate-700">
+                        <img id="corner-thumb-preview" src="" class="w-12 h-12 object-cover rounded-lg border border-slate-300">
                         <div class="flex-1 space-y-2">
-                            <input type="text" id="input-corner-url" oninput="updateStudioState()" onfocus="focusStage('card')" placeholder="Image URL..." class="w-full bg-slate-900 border border-slate-800 rounded-lg p-1.5 text-xs text-slate-200">
+                            <input type="text" id="input-corner-url" oninput="updateStudioState()" onfocus="focusStage('card')" placeholder="Image URL..." class="w-full bg-white border border-slate-300 rounded-lg p-1.5 text-xs text-slate-800">
                             <div>
-                                <label class="inline-block bg-slate-800 hover:bg-slate-700 text-slate-200 text-[11px] px-3 py-1 rounded cursor-pointer border border-slate-700 transition">
+                                <label class="inline-block bg-slate-200 hover:bg-slate-300 text-slate-700 text-[11px] px-3 py-1 rounded cursor-pointer border border-slate-300 font-medium transition">
                                     📁 Upload Photo from Device
                                     <input type="file" accept="image/*" onchange="handleCornerDeviceUpload(this)" class="hidden">
                                 </label>
@@ -629,8 +542,8 @@
                 </div>
 
                 <div>
-                    <label class="block text-xs text-slate-400 mb-1">Font Family</label>
-                    <select id="input-font-family" onchange="updateStudioState()" onfocus="focusStage('card')" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2 text-xs text-amber-200 focus:outline-none focus:border-amber-400">
+                    <label class="block text-xs text-slate-600 mb-1 font-medium">Font Family</label>
+                    <select id="input-font-family" onchange="updateStudioState()" onfocus="focusStage('card')" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2 text-xs text-slate-800 focus:outline-none focus:border-amber-500">
                         <option value="font-serif-custom">Playfair Display (Serif Classic)</option>
                         <option value="font-cursive">Great Vibes (Cursive Elegant)</option>
                         <option value="font-padauk">Padauk (Myanmar Supported)</option>
@@ -642,116 +555,89 @@
                 </div>
 
                 <div>
-                    <label class="block text-xs text-slate-400 mb-1">Start Screen Hint Text</label>
-                    <input type="text" id="input-start-hint" oninput="updateStudioState()" onfocus="focusStage('bouquet')" value="✨ Click the bouquet ✨" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2 text-xs text-slate-100 focus:outline-none focus:border-amber-400">
+                    <label class="block text-xs text-slate-600 mb-1 font-medium">Start Screen Hint Text</label>
+                    <input type="text" id="input-start-hint" oninput="updateStudioState()" onfocus="focusStage('bouquet')" value="✨ Click the bouquet ✨" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2 text-xs text-slate-800 focus:outline-none focus:border-amber-500">
                 </div>
 
                 <div>
-                    <label class="block text-xs text-slate-400 mb-1">Card Header Title</label>
-                    <input type="text" id="input-card-title" oninput="updateStudioState()" onfocus="focusStage('card')" value="Happy Birthday" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2 text-xs text-slate-100 focus:outline-none focus:border-amber-400">
+                    <label class="block text-xs text-slate-600 mb-1 font-medium">Card Header Title</label>
+                    <input type="text" id="input-card-title" oninput="updateStudioState()" onfocus="focusStage('card')" value="Happy Birthday" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2 text-xs text-slate-800 focus:outline-none focus:border-amber-500">
                 </div>
 
                 <div>
-                    <label class="block text-xs text-slate-400 mb-1">Greeting Headline</label>
-                    <input type="text" id="input-greeting" oninput="updateStudioState()" onfocus="focusStage('card')" value="🎂 Happy Birthday, Babe! 🎂" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2 text-xs text-slate-100 focus:outline-none focus:border-amber-400">
+                    <label class="block text-xs text-slate-600 mb-1 font-medium">Greeting Headline</label>
+                    <input type="text" id="input-greeting" oninput="updateStudioState()" onfocus="focusStage('card')" value="🎂 Happy Birthday, Babe! 🎂" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2 text-xs text-slate-800 focus:outline-none focus:border-amber-500">
                 </div>
 
                 <div>
-                    <label class="block text-xs text-slate-400 mb-1">Main Wish Body</label>
-                    <textarea id="input-main-msg" oninput="updateStudioState()" onfocus="focusStage('card')" rows="3" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2 text-xs text-slate-100 focus:outline-none focus:border-amber-400">Wishing you a day filled with love, joy, and endless laughter. Thank you for being my constant source of happiness! 💖</textarea>
+                    <label class="block text-xs text-slate-600 mb-1 font-medium">Main Wish Body</label>
+                    <textarea id="input-main-msg" oninput="updateStudioState()" onfocus="focusStage('card')" rows="3" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2 text-xs text-slate-800 focus:outline-none focus:border-amber-500">Wishing you a day filled with love, joy, and endless laughter. Thank you for being my constant source of happiness! 💖</textarea>
                 </div>
 
                 <div>
-                    <label class="block text-xs text-slate-400 mb-1">Sub-Message / Wish Note</label>
-                    <input type="text" id="input-sub-msg" oninput="updateStudioState()" onfocus="focusStage('card')" value="May all your dreams come true. Take good care of yourself always! ✨" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2 text-xs text-slate-100 focus:outline-none focus:border-amber-400">
+                    <label class="block text-xs text-slate-600 mb-1 font-medium">Sub-Message / Wish Note</label>
+                    <input type="text" id="input-sub-msg" oninput="updateStudioState()" onfocus="focusStage('card')" value="May all your dreams come true. Take good care of yourself always! ✨" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2 text-xs text-slate-800 focus:outline-none focus:border-amber-500">
                 </div>
 
                 <div class="grid grid-cols-2 gap-2">
                     <div>
-                        <label class="block text-xs text-slate-400 mb-1">Left Sign Footer</label>
-                        <input type="text" id="input-sign-left" oninput="updateStudioState()" onfocus="focusStage('card')" value="With All My Love ❤️" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2 text-xs text-slate-100 focus:outline-none focus:border-amber-400">
+                        <label class="block text-xs text-slate-600 mb-1 font-medium">Left Sign Footer</label>
+                        <input type="text" id="input-sign-left" oninput="updateStudioState()" onfocus="focusStage('card')" value="With All My Love ❤️" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2 text-xs text-slate-800 focus:outline-none focus:border-amber-500">
                     </div>
                     <div>
-                        <label class="block text-xs text-slate-400 mb-1">Right Sign Footer</label>
-                        <input type="text" id="input-sign-right" oninput="updateStudioState()" onfocus="focusStage('card')" value="✨ Forever Yours ✨" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2 text-xs text-slate-100 focus:outline-none focus:border-amber-400">
+                        <label class="block text-xs text-slate-600 mb-1 font-medium">Right Sign Footer</label>
+                        <input type="text" id="input-sign-right" oninput="updateStudioState()" onfocus="focusStage('card')" value="✨ Forever Yours ✨" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2 text-xs text-slate-800 focus:outline-none focus:border-amber-500">
                     </div>
                 </div>
             </div>
 
             <!-- TAB 3: AUDIO -->
             <div id="tab-sec-audio" class="hidden space-y-4">
-                <h3 class="text-xs font-bold text-amber-300 uppercase tracking-wider border-b border-slate-800 pb-2">🎵 Background Music Presets</h3>
+                <h3 class="text-xs font-bold text-amber-700 uppercase tracking-wider border-b border-slate-200 pb-2">🎵 Background Music Presets</h3>
                 
-                <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 flex items-center justify-between">
+                <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 flex items-center justify-between">
                     <div class="flex items-center gap-2">
                         <span id="audio-status-icon" class="w-2.5 h-2.5 rounded-full bg-rose-500"></span>
-                        <span id="audio-status-text" class="text-xs text-slate-300 font-medium">Audio Muted / Paused</span>
+                        <span id="audio-status-text" class="text-xs text-slate-700 font-medium">Audio Muted / Paused</span>
                     </div>
                     <div class="flex gap-2">
-                        <button onclick="previewTestAudio(true)" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs px-3 py-1 rounded">▶ Play Test</button>
-                        <button onclick="previewTestAudio(false)" class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs px-3 py-1 rounded">⏹ Stop</button>
+                        <button onclick="previewTestAudio(true)" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs px-3 py-1 rounded shadow-sm">▶ Play Test</button>
+                        <button onclick="previewTestAudio(false)" class="bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs px-3 py-1 rounded">⏹ Stop</button>
                     </div>
                 </div>
 
                 <div class="space-y-2" id="audio-preset-list"></div>
 
-                <!-- ===== NEW: DEVICE AUDIO UPLOAD ===== -->
-                <div class="pt-2 border-t border-slate-800">
-                    <label class="block text-xs font-bold text-emerald-300 uppercase tracking-wider mb-2">📁 Upload Audio from Device</label>
-
-                    <div class="audio-upload-box" id="audio-upload-box"
-                         onclick="document.getElementById('audio-device-input').click()"
-                         ondragover="handleAudioDragOver(event)"
-                         ondragleave="handleAudioDragLeave(event)"
-                         ondrop="handleAudioDrop(event)">
-                        <div class="audio-upload-label">
-                            <i class="fa-solid fa-cloud-arrow-up text-lg"></i>
-                            <span>Click to choose audio file</span>
-                        </div>
-                        <div class="audio-upload-hint">or drag & drop here · MP3, M4A, WAV, OGG</div>
-                        <div class="upload-progress" id="audio-upload-progress">
-                            <div class="upload-progress-bar" id="audio-upload-progress-bar"></div>
-                        </div>
+                <div class="pt-2 border-t border-slate-200 space-y-2">
+                    <label class="block text-xs text-slate-600 font-medium mb-1">Custom Audio Direct URL</label>
+                    <input type="text" id="input-custom-audio" onchange="setCustomAudio(this.value)" placeholder="https://example.com/song.mp3" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2 text-xs text-slate-800 focus:outline-none focus:border-amber-500">
+                    
+                    <!-- New Device Audio Upload -->
+                    <div class="pt-2">
+                        <label class="block text-xs font-bold text-teal-700 mb-1">📂 Upload Audio from Device (ဖုန်း/ကွန်ပျူတာမှ တင်မည်)</label>
+                        <input type="file" accept="audio/*" onchange="handleAudioDeviceUpload(this)" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2 text-xs text-slate-700 file:mr-2 file:px-3 file:py-1 file:rounded-lg file:border-0 file:bg-teal-600 file:text-white file:text-xs cursor-pointer font-medium">
                     </div>
-                    <input type="file" id="audio-device-input" accept="audio/*,.mp3,.m4a,.wav,.ogg" onchange="handleAudioDeviceUpload(event)" class="hidden">
-
-                    <!-- Uploaded audio info card -->
-                    <div id="uploaded-audio-info" class="uploaded-audio-info hidden">
-                        <div class="icon"><i class="fa-solid fa-music"></i></div>
-                        <div class="details">
-                            <div class="name" id="uploaded-audio-name">-</div>
-                            <div class="meta" id="uploaded-audio-meta">-</div>
-                        </div>
-                        <button class="remove-btn" onclick="removeUploadedAudio()">
-                            <i class="fa-solid fa-trash"></i> Remove
-                        </button>
-                    </div>
-                </div>
-
-                <div class="pt-2 border-t border-slate-800">
-                    <label class="block text-xs text-slate-400 mb-1">Custom Audio Direct URL</label>
-                    <input type="text" id="input-custom-audio" onchange="setCustomAudio(this.value)" placeholder="https://example.com/song.mp3" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2 text-xs text-amber-200 focus:outline-none focus:border-amber-400">
                 </div>
             </div>
 
         </section>
 
         <!-- LIVE PREVIEW -->
-        <section class="lg:col-span-7 flex flex-col bg-slate-900/60 rounded-2xl border border-slate-800 p-4 relative min-h-[550px] overflow-hidden">
+        <section class="lg:col-span-7 flex flex-col bg-white rounded-2xl border border-slate-200 p-4 relative min-h-[550px] overflow-hidden shadow-sm">
             
-            <div class="flex items-center justify-between pb-3 border-b border-slate-800 z-30">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-200 z-30">
                 <div class="flex items-center gap-2">
                     <span class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></span>
-                    <span class="text-xs font-semibold text-slate-300 uppercase tracking-wider">Interactive Live Canvas</span>
+                    <span class="text-xs font-semibold text-slate-700 uppercase tracking-wider">Interactive Live Canvas</span>
                 </div>
                 
                 <div class="flex items-center gap-2 flex-wrap">
-                    <div class="flex bg-slate-900 rounded-lg border border-slate-800 p-0.5 text-[10px]">
-                        <button onclick="focusStage('bouquet')" id="stage-btn-bouquet" class="px-2.5 py-1.5 rounded-md text-slate-400 hover:bg-slate-800 transition">🌸 Bouquet</button>
-                        <button onclick="focusStage('envelope')" id="stage-btn-envelope" class="px-2.5 py-1.5 rounded-md text-slate-400 hover:bg-slate-800 transition">✉️ Envelope</button>
-                        <button onclick="focusStage('card')" id="stage-btn-card" class="px-2.5 py-1.5 rounded-md text-slate-400 hover:bg-slate-800 transition">📜 Card</button>
+                    <div class="flex bg-slate-100 rounded-lg border border-slate-200 p-0.5 text-[10px]">
+                        <button onclick="focusStage('bouquet')" id="stage-btn-bouquet" class="px-2.5 py-1.5 rounded-md text-slate-600 hover:bg-slate-200 transition">🌸 Bouquet</button>
+                        <button onclick="focusStage('envelope')" id="stage-btn-envelope" class="px-2.5 py-1.5 rounded-md text-slate-600 hover:bg-slate-200 transition">✉️ Envelope</button>
+                        <button onclick="focusStage('card')" id="stage-btn-card" class="px-2.5 py-1.5 rounded-md text-slate-600 hover:bg-slate-200 transition">📜 Card</button>
                     </div>
-                    <button onclick="playFullFlowPreview()" class="text-xs bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold px-3 py-1.5 rounded-lg flex items-center gap-1 shadow-md transition">
+                    <button onclick="playFullFlowPreview()" class="text-xs bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold px-3 py-1.5 rounded-lg flex items-center gap-1 shadow-sm transition">
                         ▶ Full Flow
                     </button>
                 </div>
@@ -759,6 +645,7 @@
 
             <div id="preview-stage" class="flex-1 relative rounded-xl my-2 overflow-hidden flex items-center justify-center" style="background: radial-gradient(circle at center, #2e1065, #0f0728, #05020d);">
                 
+                <!-- Stage badge -->
                 <div id="stage-badge" class="stage-badge bouquet">🌸 Bouquet Stage</div>
 
                 <div id="sparkle-stage" class="absolute inset-0 pointer-events-none overflow-hidden"></div>
@@ -766,8 +653,8 @@
                 <!-- STEP 1: BOUQUET START SCREEN -->
                 <div id="preview-step-start" class="absolute inset-0 z-20 flex flex-col items-center justify-center cursor-pointer transition-all duration-500 p-4 text-center pt-14" onclick="proceedToStep2()">
                     <h2 id="prev-start-hint" class="text-amber-200 text-base sm:text-lg font-bold drop-shadow-md mb-4 pulse-glow">✨ Click the bouquet ✨</h2>
-                    <img id="prev-bouquet-img" src="" class="w-44 sm:w-52 h-auto object-contain hover:scale-105 transition-transform duration-300 filter drop-shadow-lg bouquet-sway">
-                    <p class="text-[11px] text-slate-400 mt-4">(Clicking this starts background music & opens envelope stage)</p>
+                    <img id="prev-bouquet-img" src="" class="h-auto object-contain hover:scale-105 transition-transform duration-300 filter drop-shadow-lg bouquet-sway" style="width: 180px;">
+                    <p class="text-[11px] text-slate-300 mt-4">(Clicking this starts background music & opens envelope stage)</p>
                 </div>
 
                 <!-- STEP 2: FLOATING ENVELOPE -->
@@ -777,7 +664,7 @@
                     </div>
 
                     <div id="prev-falling-card" class="anim-floating-card z-30 flex flex-col items-center justify-center cursor-pointer" onclick="proceedToStep3()">
-                        <img id="prev-envelope-img" src="" class="w-36 sm:w-44 h-auto object-contain bg-transparent border-0 outline-0 shadow-none bouquet-sway">
+                        <img id="prev-envelope-img" src="" class="h-auto object-contain bg-transparent border-0 outline-0 shadow-none bouquet-sway" style="width: 160px;">
                         <span class="pulse-glow mt-3 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-400 text-slate-900 font-bold text-xs shadow-lg border border-amber-200">
                             Click Me ✨
                         </span>
@@ -831,7 +718,7 @@
 
             </div>
 
-            <div class="text-center text-[11px] text-slate-400 mt-1">
+            <div class="text-center text-[11px] text-slate-500 mt-1">
                 💡 The preview automatically switches to the stage you're editing. Use the tabs above to jump between stages manually.
             </div>
 
@@ -841,12 +728,12 @@
 
     <!-- TELEGRAM MODAL -->
     <div id="telegram-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm flex justify-center items-center p-4 z-50 hidden overflow-y-auto">
-        <div class="bg-slate-900 border border-slate-800 rounded-3xl w-full max-w-lg p-6 space-y-4 shadow-2xl text-slate-100 my-auto">
-            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-                <h3 class="font-bold text-lg text-sky-400 flex items-center gap-2">
+        <div class="bg-white border border-slate-200 rounded-3xl w-full max-w-lg p-6 space-y-4 shadow-2xl text-slate-800 my-auto">
+            <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+                <h3 class="font-bold text-lg text-sky-600 flex items-center gap-2">
                     <i class="fa-brands fa-telegram"></i> Telegram သို့ HTML ပို့မည်
                 </h3>
-                <button onclick="closeTelegramModal()" class="text-slate-400 hover:text-white text-lg">
+                <button onclick="closeTelegramModal()" class="text-slate-400 hover:text-slate-700 text-lg">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
@@ -892,21 +779,21 @@
                     </div>
                 </div>
 
-                <div class="bg-slate-800/60 p-3.5 rounded-xl border border-sky-500/30 space-y-1">
-                    <p class="text-[11px] text-slate-300 leading-relaxed">
+                <div class="bg-slate-100 p-3.5 rounded-xl border border-sky-200 space-y-1">
+                    <p class="text-[11px] text-slate-600 leading-relaxed">
                         ငွေလွှဲပြေစာ (Screenshot) နှင့် HTML File Name ကို ထည့်ပြီး ပို့ပါ။
                         Admin မှ 15 မိနစ်အတွင်း Link/QR ထုတ်ပေးပါမည်။
                     </p>
                 </div>
 
                 <div>
-                    <label class="block text-[11px] text-slate-400 mb-1">📷 ငွေလွှဲပြေစာ (Payment Screenshot)</label>
-                    <input type="file" id="tgImageFile" accept="image/*" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-200 file:mr-2 file:px-3 file:py-1 file:rounded-lg file:border-0 file:bg-sky-600 file:text-white file:text-xs cursor-pointer">
+                    <label class="block text-[11px] text-slate-600 mb-1 font-medium">📷 ငွေလွှဲပြေစာ (Payment Screenshot)</label>
+                    <input type="file" id="tgImageFile" accept="image/*" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-700 file:mr-2 file:px-3 file:py-1 file:rounded-lg file:border-0 file:bg-sky-600 file:text-white file:text-xs cursor-pointer">
                 </div>
 
                 <div>
-                    <label class="block text-[11px] text-slate-400 mb-1">📄 HTML File Name</label>
-                    <input type="text" id="tgHtmlFileName" value="index.html" placeholder="index.html" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-sky-200 focus:outline-none focus:border-sky-500">
+                    <label class="block text-[11px] text-slate-600 mb-1 font-medium">📄 HTML File Name</label>
+                    <input type="text" id="tgHtmlFileName" value="index.html" placeholder="index.html" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-sky-500">
                 </div>
 
                 <button onclick="sendWishCardToTelegram()" id="btnTgSend" class="w-full bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-600 hover:to-blue-700 text-white rounded-xl py-2.5 text-sm font-bold shadow-md transition flex items-center justify-center gap-2">
@@ -917,16 +804,16 @@
             </div>
 
             <div id="tgThankyouBlock" class="hidden text-center space-y-3 pt-1">
-                <div class="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-3xl shadow-lg">✅</div>
-                <h4 class="text-emerald-400 font-bold text-base">ကျေးဇူးတင်ပါတယ် 🩷</h4>
-                <p class="text-xs text-slate-300 leading-relaxed">
+                <div class="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-3xl shadow-lg text-white">✅</div>
+                <h4 class="text-emerald-700 font-bold text-base">ကျေးဇူးတင်ပါတယ် 🩷</h4>
+                <p class="text-xs text-slate-600 leading-relaxed">
                     Admin ထံ ပို့ပြီးပါပြီ။ 15 မိနစ်အတွင်း Link နှင့် QR ထုတ်ယူနိုင်ပါသည်။
                 </p>
-                <div class="bg-slate-800/60 p-3 rounded-xl border border-slate-700 text-left space-y-1.5">
-                    <div class="flex justify-between items-center text-xs"><span class="text-slate-400">Admin TikTok</span><span class="text-sky-300 font-mono">@htpp.epostcard</span></div>
-                    <div class="flex justify-between items-center text-xs"><span class="text-slate-400">Admin Telegram</span><span class="text-sky-300 font-mono">@epostcarmm</span></div>
+                <div class="bg-slate-100 p-3 rounded-xl border border-slate-200 text-left space-y-1.5">
+                    <div class="flex justify-between items-center text-xs"><span class="text-slate-500">Admin TikTok</span><span class="text-sky-600 font-mono">@htpp.epostcard</span></div>
+                    <div class="flex justify-between items-center text-xs"><span class="text-slate-500">Admin Telegram</span><span class="text-sky-600 font-mono">@epostcarmm</span></div>
                 </div>
-                <button onclick="closeTelegramModal()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-xl text-xs font-bold transition">ပိတ်မည်</button>
+                <button onclick="closeTelegramModal()" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-xl text-xs font-bold transition">ပိတ်မည်</button>
             </div>
         </div>
     </div>
@@ -991,15 +878,15 @@
             gradDirection: 'circle at center',
             bouquet: BOUQUETS[0].url,
             bouquetName: BOUQUETS[0].name,
+            bouquetSize: 180,
             envelope: ENVELOPES[0].url,
             envelopeName: ENVELOPES[0].name,
+            envelopeSize: 160,
             paperClass: PAPER_DESIGNS[0].cssClass,
             paperName: PAPER_DESIGNS[0].name,
             cornerStamp: 'https://i.ibb.co/cp6WytW/download-55.jpg',
             audioUrl: AUDIO_PRESETS[0].url,
-            audioName: AUDIO_PRESETS[0].name,
-            uploadedAudioName: null,
-            uploadedAudioDataUrl: null
+            audioName: AUDIO_PRESETS[0].name
         };
 
         /* ============================================================
@@ -1061,18 +948,9 @@
                 if (key === stage) {
                     btn.className = 'px-2.5 py-1.5 rounded-md bg-amber-500 text-slate-950 font-bold transition';
                 } else {
-                    btn.className = 'px-2.5 py-1.5 rounded-md text-slate-400 hover:bg-slate-800 transition';
+                    btn.className = 'px-2.5 py-1.5 rounded-md text-slate-600 hover:bg-slate-200 transition';
                 }
             });
-        }
-
-        function autoFocusStage(stage) {
-            if (autoStageLock) clearTimeout(autoStageLock);
-            autoStageLock = setTimeout(() => {
-                if (currentStage !== stage) {
-                    focusStage(stage, { silent: true });
-                }
-            }, 120);
         }
 
         function showToast(message) {
@@ -1104,13 +982,13 @@
         function setBgMode(mode) {
             state.bgMode = mode;
             if(mode === 'single') {
-                document.getElementById('bg-mode-single').className = "px-2.5 py-1 rounded-md font-semibold bg-teal-500/20 text-teal-300 transition";
-                document.getElementById('bg-mode-gradient').className = "px-2.5 py-1 rounded-md text-slate-400 transition";
+                document.getElementById('bg-mode-single').className = "px-2.5 py-1 rounded-md font-semibold bg-white text-teal-800 shadow-sm transition";
+                document.getElementById('bg-mode-gradient').className = "px-2.5 py-1 rounded-md text-slate-600 transition";
                 document.getElementById('bg-single-box').classList.remove('hidden');
                 document.getElementById('bg-gradient-box').classList.add('hidden');
             } else {
-                document.getElementById('bg-mode-gradient').className = "px-2.5 py-1 rounded-md font-semibold bg-teal-500/20 text-teal-300 transition";
-                document.getElementById('bg-mode-single').className = "px-2.5 py-1 rounded-md text-slate-400 transition";
+                document.getElementById('bg-mode-gradient').className = "px-2.5 py-1 rounded-md font-semibold bg-white text-teal-800 shadow-sm transition";
+                document.getElementById('bg-mode-single').className = "px-2.5 py-1 rounded-md text-slate-600 transition";
                 document.getElementById('bg-gradient-box').classList.remove('hidden');
                 document.getElementById('bg-single-box').classList.add('hidden');
             }
@@ -1141,9 +1019,9 @@
         function renderBouquetGrid() {
             const grid = document.getElementById('bouquet-grid');
             grid.innerHTML = BOUQUETS.map((b, idx) => `
-                <div onclick="selectBouquet('${b.url}', '${b.name}', this)" class="bouquet-item cursor-pointer group relative rounded-lg border-2 overflow-hidden transition-all duration-200 ${state.bouquet === b.url ? 'border-amber-400 scale-105 shadow-md' : 'border-slate-800 hover:border-slate-600'}">
+                <div onclick="selectBouquet('${b.url}', '${b.name}', this)" class="bouquet-item cursor-pointer group relative rounded-lg border-2 overflow-hidden transition-all duration-200 ${state.bouquet === b.url ? 'border-amber-500 scale-105 shadow-md' : 'border-slate-200 hover:border-slate-400'}">
                     <img src="${b.url}" alt="${b.name}" class="w-full h-12 object-cover">
-                    <span class="absolute bottom-0 inset-x-0 bg-black/70 text-[9px] text-center truncate px-1 text-slate-200">${idx+1}</span>
+                    <span class="absolute bottom-0 inset-x-0 bg-black/70 text-[9px] text-center truncate px-1 text-white">${idx+1}</span>
                 </div>
             `).join('');
         }
@@ -1174,9 +1052,9 @@
         function renderEnvelopeGrid() {
             const grid = document.getElementById('envelope-grid');
             grid.innerHTML = ENVELOPES.map((e, idx) => `
-                <div onclick="selectEnvelope('${e.url}', '${e.name}', this)" class="envelope-item cursor-pointer group relative rounded-lg border-2 overflow-hidden transition-all duration-200 ${state.envelope === e.url ? 'border-rose-400 scale-105 shadow-md' : 'border-slate-800 hover:border-slate-600'}">
+                <div onclick="selectEnvelope('${e.url}', '${e.name}', this)" class="envelope-item cursor-pointer group relative rounded-lg border-2 overflow-hidden transition-all duration-200 ${state.envelope === e.url ? 'border-rose-500 scale-105 shadow-md' : 'border-slate-200 hover:border-slate-400'}">
                     <img src="${e.url}" alt="${e.name}" class="w-full h-12 object-cover">
-                    <span class="absolute bottom-0 inset-x-0 bg-black/70 text-[9px] text-center truncate px-1 text-slate-200">${idx+1}</span>
+                    <span class="absolute bottom-0 inset-x-0 bg-black/70 text-[9px] text-center truncate px-1 text-white">${idx+1}</span>
                 </div>
             `).join('');
         }
@@ -1207,7 +1085,7 @@
         function renderPaperGrid() {
             const grid = document.getElementById('paper-grid');
             grid.innerHTML = PAPER_DESIGNS.map((p, idx) => `
-                <div onclick="selectPaper('${p.cssClass}', '${p.name}', this)" class="paper-item cursor-pointer rounded-lg border-2 p-2 text-center text-[10px] font-semibold transition-all duration-200 ${p.cssClass} ${state.paperClass === p.cssClass ? 'border-amber-400 scale-105 ring-2 ring-amber-400/50' : 'border-slate-700 opacity-80 hover:opacity-100'}">
+                <div onclick="selectPaper('${p.cssClass}', '${p.name}', this)" class="paper-item cursor-pointer rounded-lg border-2 p-2 text-center text-[10px] font-semibold transition-all duration-200 ${p.cssClass} ${state.paperClass === p.cssClass ? 'border-amber-500 scale-105 ring-2 ring-amber-400/50' : 'border-slate-300 opacity-80 hover:opacity-100'}">
                     <div class="truncate">${idx+1}. ${p.name}</div>
                 </div>
             `).join('');
@@ -1229,9 +1107,9 @@
         function renderAudioList() {
             const list = document.getElementById('audio-preset-list');
             list.innerHTML = AUDIO_PRESETS.map((a, idx) => `
-                <div onclick="selectAudio('${a.url}', '${a.name}')" class="cursor-pointer flex items-center justify-between p-2.5 rounded-lg border ${state.audioUrl === a.url ? 'bg-amber-500/10 border-amber-500/40 text-amber-200' : 'bg-slate-950 border-slate-800 text-slate-400 hover:border-slate-700'}">
+                <div onclick="selectAudio('${a.url}', '${a.name}')" class="cursor-pointer flex items-center justify-between p-2.5 rounded-lg border ${state.audioUrl === a.url ? 'bg-amber-50 border-amber-300 text-amber-900 font-semibold' : 'bg-slate-50 border-slate-200 text-slate-700 hover:border-slate-300'}">
                     <span class="text-xs font-medium">${idx+1}. ${a.name}</span>
-                    ${state.audioUrl === a.url ? '<span class="text-xs">✓ Active</span>' : ''}
+                    ${state.audioUrl === a.url ? '<span class="text-xs text-amber-600">✓ Active</span>' : ''}
                 </div>
             `).join('');
         }
@@ -1250,6 +1128,21 @@
             state.audioName = 'Custom Audio URL';
             renderAudioList();
             updateStudioAudioPlayer();
+        }
+
+        function handleAudioDeviceUpload(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    state.audioUrl = e.target.result;
+                    state.audioName = 'Uploaded Device Audio';
+                    document.getElementById('input-custom-audio').value = 'Uploaded File: ' + input.files[0].name;
+                    renderAudioList();
+                    updateStudioAudioPlayer();
+                    alert('🎵 Audio ဖိုင်ကို အောင်မြင်စွာ တင်ပြီးပါပြီ!');
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
         }
 
         function updateStudioAudioPlayer() {
@@ -1283,122 +1176,6 @@
             }
         }
 
-        /* ============================================================
-           DEVICE AUDIO UPLOAD
-           ============================================================ */
-        function handleAudioDragOver(event) {
-            event.preventDefault();
-            event.stopPropagation();
-            document.getElementById('audio-upload-box').classList.add('dragover');
-        }
-
-        function handleAudioDragLeave(event) {
-            event.preventDefault();
-            event.stopPropagation();
-            document.getElementById('audio-upload-box').classList.remove('dragover');
-        }
-
-        function handleAudioDrop(event) {
-            event.preventDefault();
-            event.stopPropagation();
-            document.getElementById('audio-upload-box').classList.remove('dragover');
-            const files = event.dataTransfer.files;
-            if (files && files.length > 0) {
-                processAudioFile(files[0]);
-            }
-        }
-
-        function handleAudioDeviceUpload(event) {
-            const files = event.target.files;
-            if (files && files.length > 0) {
-                processAudioFile(files[0]);
-            }
-        }
-
-        function processAudioFile(file) {
-            const validTypes = ['audio/mpeg', 'audio/mp3', 'audio/mp4', 'audio/m4a', 'audio/wav', 'audio/x-wav', 'audio/ogg', 'audio/x-m4a'];
-            const ext = (file.name.split('.').pop() || '').toLowerCase();
-            const validExts = ['mp3', 'm4a', 'wav', 'ogg', 'mp4'];
-
-            if (!validTypes.includes(file.type) && !validExts.includes(ext)) {
-                alert('ကျေးဇူးပြု၍ MP3, M4A, WAV သို့မဟုတ် OGG ဖိုင် ရွေးပါ။');
-                return;
-            }
-
-            const MAX_MB = 15;
-            if (file.size > MAX_MB * 1024 * 1024) {
-                alert(`ဖိုင်အရွယ်အစား ${MAX_MB}MB ထက် မကျော်ရပါ။ (လက်ရှိ: ${(file.size / (1024*1024)).toFixed(2)}MB)`);
-                return;
-            }
-
-            const progressBox = document.getElementById('audio-upload-progress');
-            const progressBar = document.getElementById('audio-upload-progress-bar');
-            progressBox.classList.add('show');
-            progressBar.style.width = '15%';
-
-            const reader = new FileReader();
-
-            reader.onprogress = function(e) {
-                if (e.lengthComputable) {
-                    const percent = Math.round((e.loaded / e.total) * 100);
-                    progressBar.style.width = Math.max(15, percent) + '%';
-                }
-            };
-
-            reader.onload = function(e) {
-                progressBar.style.width = '100%';
-                state.audioUrl = e.target.result;
-                state.audioName = '📁 ' + file.name;
-                state.uploadedAudioName = file.name;
-                state.uploadedAudioDataUrl = e.target.result;
-
-                renderAudioList();
-                updateStudioAudioPlayer();
-                renderUploadedAudioInfo(file);
-
-                setTimeout(() => {
-                    progressBox.classList.remove('show');
-                    progressBar.style.width = '0%';
-                }, 600);
-
-                showToast('🎵 Audio uploaded: ' + file.name);
-
-                setTimeout(() => {
-                    previewTestAudio(true);
-                }, 200);
-            };
-
-            reader.onerror = function() {
-                alert('ဖိုင်ဖတ်ခြင်း မအောင်မြင်ပါ။');
-                progressBox.classList.remove('show');
-            };
-
-            reader.readAsDataURL(file);
-        }
-
-        function renderUploadedAudioInfo(file) {
-            const info = document.getElementById('uploaded-audio-info');
-            info.classList.remove('hidden');
-            document.getElementById('uploaded-audio-name').textContent = file.name;
-            const sizeMB = (file.size / (1024 * 1024)).toFixed(2);
-            const ext = (file.name.split('.').pop() || '').toUpperCase();
-            document.getElementById('uploaded-audio-meta').textContent = `${ext} · ${sizeMB} MB · Ready`;
-        }
-
-        function removeUploadedAudio() {
-            state.uploadedAudioName = null;
-            state.uploadedAudioDataUrl = null;
-            document.getElementById('uploaded-audio-info').classList.add('hidden');
-            document.getElementById('audio-device-input').value = '';
-
-            // Fall back to default preset
-            state.audioUrl = AUDIO_PRESETS[0].url;
-            state.audioName = AUDIO_PRESETS[0].name;
-            renderAudioList();
-            updateStudioAudioPlayer();
-            showToast('🗑️ Uploaded audio removed — reverted to default');
-        }
-
         function handleCornerDeviceUpload(input) {
             if (input.files && input.files[0]) {
                 const reader = new FileReader();
@@ -1414,7 +1191,7 @@
         }
 
         /* ============================================================
-           UPDATE STUDIO STATE
+           UPDATE STUDIO STATE (text, images, background, sizes)
            ============================================================ */
         function updateStudioState() {
             const fontClass = document.getElementById('input-font-family').value;
@@ -1434,13 +1211,24 @@
                 }
             }
             
+            // Sizes update
+            state.bouquetSize = document.getElementById('input-bouquet-size').value;
+            document.getElementById('bouquet-size-val').innerText = state.bouquetSize + 'px';
+
+            state.envelopeSize = document.getElementById('input-envelope-size').value;
+            document.getElementById('envelope-size-val').innerText = state.envelopeSize + 'px';
+
             document.getElementById('prev-start-hint').innerText = document.getElementById('input-start-hint').value;
             document.getElementById('prev-start-hint').className = `text-amber-200 text-base sm:text-lg font-bold drop-shadow-md mb-4 pulse-glow ${fontClass}`;
-            document.getElementById('prev-bouquet-img').src = state.bouquet;
+            
+            const bImg = document.getElementById('prev-bouquet-img');
+            bImg.src = state.bouquet;
+            bImg.style.width = state.bouquetSize + 'px';
 
             const envImg = document.getElementById('prev-envelope-img');
             envImg.src = state.envelope;
-            envImg.className = "w-36 sm:w-44 h-auto object-contain bg-transparent border-0 outline-0 shadow-none bouquet-sway";
+            envImg.style.width = state.envelopeSize + 'px';
+            envImg.className = "h-auto object-contain bg-transparent border-0 outline-0 shadow-none bouquet-sway";
 
             const paperEl = document.getElementById('prev-paper-element');
             paperEl.className = `${state.paperClass} relative w-full max-w-sm p-6 sm:p-7 rounded-xl shadow-2xl transition-all duration-300 transform scale-100 ${fontClass}`;
@@ -1460,7 +1248,7 @@
         }
 
         /* ============================================================
-           STEP TRANSITIONS
+           STEP TRANSITIONS (manual clicks in preview)
            ============================================================ */
         function proceedToStep2() {
             const audioEl = document.getElementById('liveBgMusic');
@@ -1478,10 +1266,6 @@
         function closeCardModal() {
             focusStage('envelope');
             closeCornerFullModal();
-        }
-
-        function directOpenCardModal() {
-            focusStage('card');
         }
 
         function openCornerFullModal(e) {
@@ -1505,24 +1289,27 @@
             showToast('▶ Full flow replay — Bouquet ➔ Envelope ➔ Card');
         }
 
+        /* ============================================================
+           TABS
+           ============================================================ */
         function switchControlTab(tab) {
             document.getElementById('tab-sec-presets').classList.add('hidden');
             document.getElementById('tab-sec-content').classList.add('hidden');
             document.getElementById('tab-sec-audio').classList.add('hidden');
 
-            document.getElementById('tab-btn-presets').className = "flex-1 text-xs font-semibold py-2 rounded-lg bg-slate-800 text-slate-400 hover:bg-slate-700";
-            document.getElementById('tab-btn-content').className = "flex-1 text-xs font-semibold py-2 rounded-lg bg-slate-800 text-slate-400 hover:bg-slate-700";
-            document.getElementById('tab-btn-audio').className = "flex-1 text-xs font-semibold py-2 rounded-lg bg-slate-800 text-slate-400 hover:bg-slate-700";
+            document.getElementById('tab-btn-presets').className = "flex-1 text-xs font-semibold py-2 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200";
+            document.getElementById('tab-btn-content').className = "flex-1 text-xs font-semibold py-2 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200";
+            document.getElementById('tab-btn-audio').className = "flex-1 text-xs font-semibold py-2 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200";
 
             if(tab === 'presets') {
                 document.getElementById('tab-sec-presets').classList.remove('hidden');
-                document.getElementById('tab-btn-presets').className = "flex-1 text-xs font-semibold py-2 rounded-lg bg-amber-500/20 text-amber-300 border border-amber-500/30";
+                document.getElementById('tab-btn-presets').className = "flex-1 text-xs font-semibold py-2 rounded-lg bg-amber-50 text-amber-800 border border-amber-300";
             } else if(tab === 'content') {
                 document.getElementById('tab-sec-content').classList.remove('hidden');
-                document.getElementById('tab-btn-content').className = "flex-1 text-xs font-semibold py-2 rounded-lg bg-amber-500/20 text-amber-300 border border-amber-500/30";
+                document.getElementById('tab-btn-content').className = "flex-1 text-xs font-semibold py-2 rounded-lg bg-amber-50 text-amber-800 border border-amber-300";
             } else {
                 document.getElementById('tab-sec-audio').classList.remove('hidden');
-                document.getElementById('tab-btn-audio').className = "flex-1 text-xs font-semibold py-2 rounded-lg bg-amber-500/20 text-amber-300 border border-amber-500/30";
+                document.getElementById('tab-btn-audio').className = "flex-1 text-xs font-semibold py-2 rounded-lg bg-amber-50 text-amber-800 border border-amber-300";
             }
         }
 
@@ -1543,18 +1330,14 @@
         }
 
         function resetAllDefaults() {
-            // Clear uploaded audio
-            state.uploadedAudioName = null;
-            state.uploadedAudioDataUrl = null;
-            document.getElementById('uploaded-audio-info').classList.add('hidden');
-            document.getElementById('audio-device-input').value = '';
-
             selectBouquet(BOUQUETS[0].url, BOUQUETS[0].name);
             selectEnvelope(ENVELOPES[0].url, ENVELOPES[0].name);
             selectPaper(PAPER_DESIGNS[0].cssClass, PAPER_DESIGNS[0].name);
             selectAudio(AUDIO_PRESETS[0].url, AUDIO_PRESETS[0].name);
             setQuickGradient('#2e1065', '#05020d', 'circle at center');
             
+            document.getElementById('input-bouquet-size').value = 180;
+            document.getElementById('input-envelope-size').value = 160;
             document.getElementById('input-font-family').value = 'font-serif-custom';
             document.getElementById('input-start-hint').value = '✨ Click the bouquet ✨';
             document.getElementById('input-card-title').value = 'Happy Birthday';
@@ -1591,9 +1374,6 @@
                     exportBgCss = `background: linear-gradient(${state.gradDirection}, ${state.gradColor1}, ${state.gradColor2});`;
                 }
             }
-
-            // Use uploaded audio (data URL) if present, else preset URL
-            const finalAudioUrl = state.uploadedAudioDataUrl || state.audioUrl;
 
             return `<!DOCTYPE html>
 <html lang="en">
@@ -1658,6 +1438,7 @@
             outline: none !important;
             box-shadow: none !important;
             background: transparent !important;
+            width: ${state.envelopeSize}px !important;
         }
 
         .free-floating-image:hover img {
@@ -1780,13 +1561,13 @@
 </head>
 <body class="relative flex items-center justify-center min-h-screen select-none overflow-hidden ${fontClass}">
 
-    <audio id="bgMusic" loop src="${finalAudioUrl}"></audio>
+    <audio id="bgMusic" loop src="${state.audioUrl}"></audio>
 
     <div id="startScreen" class="absolute inset-0 z-40 flex flex-col items-center justify-center cursor-pointer transition-opacity duration-700" onclick="startExperience()">
         <h1 class="text-amber-200 text-lg md:text-xl font-bold tracking-wide drop-shadow-md mb-6 click-hint text-center px-4">
             ${startHint}
         </h1>
-        <img src="${state.bouquet}" alt="Bouquet" class="w-48 sm:w-56 h-auto object-contain hover:scale-105 transition-transform duration-300 bouquet-sway">
+        <img src="${state.bouquet}" alt="Bouquet" class="h-auto object-contain hover:scale-105 transition-transform duration-300 bouquet-sway" style="width: ${state.bouquetSize}px;">
     </div>
 
     <div id="mainContent" class="hidden w-full h-full transition-all duration-500">
@@ -1800,7 +1581,7 @@
         </div>
 
         <div id="fallingCard" class="free-floating-image z-20 flex flex-col items-center justify-center" onclick="openWishCard()">
-            <img src="${state.envelope}" alt="Special" class="w-40 sm:w-48 h-auto object-contain pointer-events-auto bg-transparent border-0 outline-0 shadow-none bouquet-sway">
+            <img src="${state.envelope}" alt="Special" class="h-auto object-contain pointer-events-auto bg-transparent border-0 outline-0 shadow-none bouquet-sway" style="width: ${state.envelopeSize}px;">
             <span class="click-hint mt-3 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-400/90 text-slate-900 font-bold text-xs tracking-wider shadow-lg border border-amber-200">
                 <svg class="w-3.5 h-3.5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"></path></svg>
                 Click Me ✨
@@ -1917,6 +1698,9 @@
 </html>`;
         }
 
+        /* ============================================================
+           COPY TO CLIPBOARD
+           ============================================================ */
         function fallbackCopy(text) {
             const ta = document.createElement('textarea');
             ta.value = text;
@@ -1982,7 +1766,7 @@
             if (!fileName.endsWith('.html')) fileName += '.html';
 
             statusEl.classList.remove('hidden');
-            statusEl.className = 'text-xs text-center font-semibold text-sky-400';
+            statusEl.className = 'text-xs text-center font-semibold text-sky-600';
             statusEl.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1"></i> Telegram သို့ ပို့နေသည်...';
             sendBtn.disabled = true;
             sendBtn.classList.add('opacity-50');
@@ -2014,7 +1798,7 @@
                 document.getElementById('tgFormBlock').classList.add('hidden');
                 document.getElementById('tgThankyouBlock').classList.remove('hidden');
             } catch (err) {
-                statusEl.className = 'text-xs text-center font-semibold text-rose-400';
+                statusEl.className = 'text-xs text-center font-semibold text-rose-600';
                 statusEl.textContent = '❌ Error: ' + err.message;
             } finally {
                 sendBtn.disabled = false;
